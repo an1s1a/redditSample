@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 ext {
     dagger_version = '2.28'
+    lifecycle_version = '2.2.0'
 }
 
 buildscript {
