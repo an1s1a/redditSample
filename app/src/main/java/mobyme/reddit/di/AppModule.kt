@@ -1,9 +1,14 @@
 package mobyme.reddit.di
 
+import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import mobyme.reddit.Constants
 import mobyme.reddit.RedditApplication
+import mobyme.reddit.data.RedditDatabase
+import mobyme.reddit.data.dao.RedditImageDao
 import javax.inject.Singleton
 
 /**
@@ -20,5 +25,19 @@ class AppModule {
     fun provideContext(application: RedditApplication): Context {
         return application.applicationContext
     }
+
+    @Provides
+    @Singleton
+    fun provideRedditDatabase(app: Application): RedditDatabase = Room.databaseBuilder(
+        app,
+        RedditDatabase::class.java,
+        Constants.DATABASE_NAME
+    )
+        .fallbackToDestructiveMigration()
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideLocationDao(database: RedditDatabase): RedditImageDao = database.redditImageDao()
 
 }
