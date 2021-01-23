@@ -1,5 +1,5 @@
 package mobyme.reddit.data.model
 
 data class Preview(
-    var images: Image
+    var images: List<Image> = listOf()
 )

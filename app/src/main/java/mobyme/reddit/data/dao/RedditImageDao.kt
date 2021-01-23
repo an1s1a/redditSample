@@ -11,7 +11,7 @@ import mobyme.reddit.data.model.RedditImage
 interface RedditImageDao {
 
     @Query("SELECT * FROM reddit_image")
-    fun getImages(): List<RedditImage>
+    fun getImages(): LiveData<List<RedditImage>>
 
     @Query("SELECT * FROM reddit_image WHERE id = :id")
     fun getImagebyId(id: Long): LiveData<RedditImage>

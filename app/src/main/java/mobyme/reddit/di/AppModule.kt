@@ -5,10 +5,16 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import mobyme.reddit.Constants
 import mobyme.reddit.RedditApplication
+import mobyme.reddit.annotations.CoroutineScopeIO
 import mobyme.reddit.data.RedditDatabase
+import mobyme.reddit.data.api.RedditService
 import mobyme.reddit.data.dao.RedditImageDao
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -39,5 +45,24 @@ class AppModule {
     @Provides
     @Singleton
     fun provideLocationDao(database: RedditDatabase): RedditImageDao = database.redditImageDao()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(Constants.BASE_URL)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideService(retrofit: Retrofit): RedditService {
+        return retrofit.create(RedditService::class.java)
+    }
+
+    @CoroutineScopeIO
+    @Provides
+    fun provideCoroutineScope() = CoroutineScope(Dispatchers.IO)
 
 }
