@@ -1,8 +1,8 @@
 package mobyme.reddit.di
 
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import mobyme.reddit.RedditApplication
 import javax.inject.Singleton
 
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidInjectionModule::class,
+        AndroidSupportInjectionModule::class,
         AppModule::class,
         ActivityModule::class]
 )

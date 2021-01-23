@@ -9,6 +9,6 @@ import mobyme.reddit.ui.main.MainActivity
 abstract class ActivityModule {
 
     @ActivityScope
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = [FragmentModule::class])
     abstract fun mainActivity(): MainActivity
 }

@@ -6,6 +6,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import mobyme.reddit.annotations.ViewModelKey
+import mobyme.reddit.ui.favorite.FavoritesViewModel
+import mobyme.reddit.ui.home.HomeViewModel
 import mobyme.reddit.ui.main.MainViewModel
 
 @Module
@@ -19,4 +21,13 @@ abstract class ViewModelModule {
     @ViewModelKey(MainViewModel::class)
     abstract fun provideMainViewModel(mainViewModel: MainViewModel): ViewModel
 
+    @IntoMap
+    @Binds
+    @ViewModelKey(FavoritesViewModel::class)
+    abstract fun provideFavoritesViewModel(favoritesViewModel: FavoritesViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun provideHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 }
