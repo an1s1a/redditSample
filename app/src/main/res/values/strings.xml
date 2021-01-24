@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RedditSample</string>
+    <string name="search">Search</string>
+    <string name="no_images">Images not found</string>
 </resources>

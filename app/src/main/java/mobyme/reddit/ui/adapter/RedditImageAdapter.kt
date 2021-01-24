@@ -1,17 +1,26 @@
 package mobyme.reddit.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import mobyme.reddit.data.model.RedditImage
+import com.bumptech.glide.Glide
+import mobyme.reddit.data.model.entity.RedditImage
 import mobyme.reddit.databinding.ImageItemBinding
 
-class RedditImageAdapter(val clickListener: RedditImageClickListener) : ListAdapter<RedditImage, RedditImageAdapter.ViewHolder>(ImageDiffCallback()) {
+class RedditImageAdapter(val clickListener: RedditImageClickListener) : ListAdapter<RedditImage,
+        RedditImageAdapter.ViewHolder>(ImageDiffCallback()) {
 
     class ViewHolder(val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RedditImage, clickListener: RedditImageClickListener) {
+            Log.e("RedditImageAdapter", "bind() item value $item")
+            binding.redditImage = item
+            binding.clickListener = clickListener
+            Glide.with(itemView.context)
+                .load(item.thumbnail)
+                .into(binding.imageView)
             binding.executePendingBindings()
         }
 
