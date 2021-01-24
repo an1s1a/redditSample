@@ -1,6 +1,5 @@
 package mobyme.reddit.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
@@ -34,7 +33,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRedditDatabase(app: Application): RedditDatabase = Room.databaseBuilder(
+    fun provideRedditDatabase(app: RedditApplication): RedditDatabase = Room.databaseBuilder(
         app,
         RedditDatabase::class.java,
         Constants.DATABASE_NAME
@@ -44,7 +43,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideLocationDao(database: RedditDatabase): RedditImageDao = database.redditImageDao()
+    fun provideRedditImageDao(database: RedditDatabase): RedditImageDao = database.redditImageDao()
 
     @Provides
     @Singleton
