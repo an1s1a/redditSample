@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 import mobyme.reddit.annotations.ViewModelKey
 import mobyme.reddit.ui.favorite.FavoritesViewModel
 import mobyme.reddit.ui.home.HomeViewModel
+import mobyme.reddit.ui.imageslider.ImageSliderViewModel
 import mobyme.reddit.ui.main.MainViewModel
 
 @Module
@@ -30,4 +31,9 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(HomeViewModel::class)
     abstract fun provideHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(ImageSliderViewModel::class)
+    abstract fun provideImageSliderViewModel(imageSliderViewModel: ImageSliderViewModel): ViewModel
 }

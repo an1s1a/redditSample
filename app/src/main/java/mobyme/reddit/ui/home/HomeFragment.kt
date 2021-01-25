@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import mobyme.reddit.R
 import mobyme.reddit.data.Result
@@ -19,11 +20,18 @@ import mobyme.reddit.databinding.FragmentHomeBinding
 import mobyme.reddit.ui.BaseFragment
 import mobyme.reddit.ui.adapter.RedditImageAdapter
 import mobyme.reddit.ui.adapter.RedditImageClickListener
+import mobyme.reddit.ui.main.ViewPagerFragmentDirections
 
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private lateinit var binding: FragmentHomeBinding
-    private val adapter = RedditImageAdapter(RedditImageClickListener {})
+    private val adapter = RedditImageAdapter(RedditImageClickListener { redditImage ->
+        val action = ViewPagerFragmentDirections.actionToImageDetail(
+            redditImage.thumbnail,
+            redditImage.title
+        )
+        view?.findNavController()?.navigate(action)
+    })
 
     override fun onCreateView(
         inflater: LayoutInflater,

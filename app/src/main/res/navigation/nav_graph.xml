@@ -10,6 +10,24 @@
         android:name="mobyme.reddit.ui.main.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_viewpager" >
+        <action android:id="@+id/action_to_ImageDetail"
+            app:destination="@id/imageDetailFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
+
+    <fragment
+        android:id="@+id/imageDetailFragment"
+        android:name="mobyme.reddit.ui.imageslider.ImageDetailFragment"
+        android:label="fragment_image_detail"
+        tools:layout="@layout/fragment_image_detail" >
+        <argument
+            android:name="image_url"
+            app:argType="string" />
+        <argument
+            android:name="image_title"
+            app:argType="string" />
+    </fragment>
+
+
 
 </navigation>
